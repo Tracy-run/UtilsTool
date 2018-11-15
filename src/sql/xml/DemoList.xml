@@ -1,0 +1,842 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.meyki.elife.plat.console.agency.mapper.TopUserMapper">
+
+	<!--实体映射-->
+	<resultMap id="topUserResultMap" type="com.meyki.elife.plat.console.agency.domain.TopUser">
+		<!--id-->
+		<id property="id" column="id" />
+		<!--逻辑id，uuid-->
+		<result property="userId" column="user_id" />
+		<!--用户名-->
+		<result property="userName" column="username" />
+		<!--真实姓名-->
+		<result property="trueName" column="true_name" />
+		<!--密码-->
+		<result property="password" column="password" />
+		<!--盐-->
+		<result property="salt" column="salt" />
+		<!--令牌-->
+		<result property="token" column="token" />
+		<!--昵称-->
+		<result property="nickname" column="nickname" />
+		<!--邮箱-->
+		<result property="email" column="email" />
+		<!--用户类型:0-逻辑区域代理 1-物理区域代理，默认值为0-->
+		<result property="userType" column="user_type" />
+		<!--手机号-->
+		<result property="mobile" column="mobile" />
+		<!--固定电话-->
+		<result property="telephone" column="telephone" />
+		<!--用户头像-->
+		<result property="avatar" column="avatar" />
+		<!--用户级别，0-省级代理 1-区县代理 2-市级代理，默认值为0-->
+		<result property="userLevel" column="user_level" />
+		<!--身份证号-->
+		<result property="idCardNo" column="id_card_no" />
+		<!--用户状态， 0-禁用 1-启用 2-作废（逻辑删除）-->
+		<result property="status" column="status" />
+		<!--省名称-->
+		<result property="province" column="province" />
+		<!--省代码-->
+		<result property="provinceCode" column="province_code" />
+		<!--市名称-->
+		<result property="city" column="city" />
+		<!--市代码-->
+		<result property="cityCode" column="city_code" />
+		<!--县名称-->
+		<result property="county" column="county" />
+		<!--县代码-->
+		<result property="countyCode" column="county_code" />
+		<!--创建人-->
+		<result property="creater" column="creater" />
+		<!--创建时间-->
+		<result property="createdTime" column="created_time" />
+		<!--修改人-->
+		<result property="modifier" column="modifier" />
+		<!--修改时间-->
+		<result property="updatedTime" column="updated_time" />
+		<!--最后登录时间-->
+		<result property="lastLoginTime" column="last_login_time" />
+	</resultMap>
+
+	<!-- 通用查询结果列-->
+	<sql id="Base_Column_List">
+			 id,	user_id,	username,	true_name,	password,	salt,	token,	nickname,	email,	user_type,	mobile,	telephone,	avatar,	user_level,	id_card_no,	status,	province,	province_code,	city,	city_code,	county,	county_code,	creater,	DATE_FORMAT(created_time,'%Y-%m-%d %H:%i:%s') AS created_time,	modifier,	updated_time,	last_login_time
+	</sql>
+
+	<!-- 查询（根据主键ID查询） -->
+	<select id="getSingleByID" resultMap="topUserResultMap" parameterType="java.lang.Integer">
+		 SELECT
+		 <include refid="Base_Column_List" />
+		 FROM agent_top_user
+		 WHERE id = #{id}
+	</select>
+
+	<!-- 查询（根据条件查询 实体） -->
+	<select id="getSingle" resultMap="topUserResultMap" parameterType="com.meyki.elife.plat.console.agency.domain.TopUser">
+		 SELECT
+		 <include refid="Base_Column_List" />
+		 FROM agent_top_user
+		 <trim prefix="WHERE" prefixOverrides="AND|OR">
+			<if test="id!=null">
+				  AND id=#{id} 
+			</if>
+			<if test="userId!=null">
+				  AND user_id=#{userId} 
+			</if>
+			<if test="userName!=null">
+				  AND username=#{userName} 
+			</if>
+			<if test="trueName!=null">
+				  AND true_name=#{trueName} 
+			</if>
+			<if test="password!=null">
+				  AND password=#{password} 
+			</if>
+			<if test="salt!=null">
+				  AND salt=#{salt} 
+			</if>
+			<if test="token!=null">
+				  AND token=#{token} 
+			</if>
+			<if test="nickname!=null">
+				  AND nickname=#{nickname} 
+			</if>
+			<if test="email!=null">
+				  AND email=#{email} 
+			</if>
+			<if test="userType!=null">
+				  AND user_type=#{userType} 
+			</if>
+			<if test="mobile!=null">
+				  AND mobile=#{mobile} 
+			</if>
+			<if test="telephone!=null">
+				  AND telephone=#{telephone} 
+			</if>
+			<if test="avatar!=null">
+				  AND avatar=#{avatar} 
+			</if>
+			<if test="userLevel!=null">
+				  AND user_level=#{userLevel} 
+			</if>
+			<if test="idCardNo!=null">
+				  AND id_card_no=#{idCardNo} 
+			</if>
+			<if test="status!=null">
+				  AND status=#{status} 
+			</if>
+			<if test="province!=null">
+				  AND province=#{province} 
+			</if>
+			<if test="provinceCode!=null">
+				  AND province_code=#{provinceCode} 
+			</if>
+			<if test="city!=null">
+				  AND city=#{city} 
+			</if>
+			<if test="cityCode!=null">
+				  AND city_code=#{cityCode} 
+			</if>
+			<if test="county!=null">
+				  AND county=#{county} 
+			</if>
+			<if test="countyCode!=null">
+				  AND county_code=#{countyCode} 
+			</if>
+			<if test="creater!=null">
+				  AND creater=#{creater} 
+			</if>
+			<if test="createdTime!=null">
+				  AND created_time=#{createdTime} 
+			</if>
+			<if test="modifier!=null">
+				  AND modifier=#{modifier} 
+			</if>
+			<if test="updatedTime!=null">
+				  AND updated_time=#{updatedTime} 
+			</if>
+			<if test="lastLoginTime!=null">
+				  AND last_login_time=#{lastLoginTime} 
+			</if>
+		</trim>
+	</select>
+
+	<!-- 查询（按条件查询记录 ） -->
+	<select id="select" resultMap="topUserResultMap" parameterType="java.util.Map">
+		 SELECT
+		 <include refid="Base_Column_List" />
+		 FROM agent_top_user
+			<trim prefix="WHERE" prefixOverrides="AND|OR">
+			<if test="userId!=null">
+				  AND user_id=#{userId} 
+			</if>
+			<if test="userName!=null">
+				  AND username=#{userName} 
+			</if>
+			<if test="trueName!=null">
+				  AND true_name=#{trueName} 
+			</if>
+			<if test="status!=null">
+				  AND status=#{status} 
+			</if>
+			<if test="province!=null">
+				  AND province=#{province} 
+			</if>
+			<if test="provinceCode!=null">
+				  AND province_code=#{provinceCode} 
+			</if>
+			<if test="city!=null">
+				  AND city=#{city} 
+			</if>
+			<if test="cityCode!=null">
+				  AND city_code=#{cityCode} 
+			</if>
+			<if test="county!=null">
+				  AND county=#{county} 
+			</if>
+			<if test="countyCode!=null">
+				  AND county_code=#{countyCode} 
+			</if>
+			</trim>
+			<if test="startRecord!=null">
+	          limit #{startRecord},#{pageSize}
+	        </if>
+	</select>
+
+	<!--删除：根据主键ID删除-->
+	<delete id="deleteByID" parameterType="java.lang.Integer">
+		 DELETE FROM agent_top_user
+		 WHERE id = #{id}
+	</delete>
+
+	<!-- 删除（根据条件删除） -->
+	<delete id="delete" parameterType="com.meyki.elife.plat.console.agency.domain.TopUser">
+		 DELETE FROM agent_top_user
+		 <trim prefix="WHERE" prefixOverrides="AND|OR">
+			<if test="id!=null">
+				  AND id=#{id} 
+			</if>
+			<if test="userId!=null">
+				  AND user_id=#{userId} 
+			</if>
+			<if test="userName!=null">
+				  AND username=#{userName} 
+			</if>
+			<if test="trueName!=null">
+				  AND true_name=#{trueName} 
+			</if>
+			<if test="password!=null">
+				  AND password=#{password} 
+			</if>
+			<if test="salt!=null">
+				  AND salt=#{salt} 
+			</if>
+			<if test="token!=null">
+				  AND token=#{token} 
+			</if>
+			<if test="nickname!=null">
+				  AND nickname=#{nickname} 
+			</if>
+			<if test="email!=null">
+				  AND email=#{email} 
+			</if>
+			<if test="userType!=null">
+				  AND user_type=#{userType} 
+			</if>
+			<if test="mobile!=null">
+				  AND mobile=#{mobile} 
+			</if>
+			<if test="telephone!=null">
+				  AND telephone=#{telephone} 
+			</if>
+			<if test="avatar!=null">
+				  AND avatar=#{avatar} 
+			</if>
+			<if test="userLevel!=null">
+				  AND user_level=#{userLevel} 
+			</if>
+			<if test="idCardNo!=null">
+				  AND id_card_no=#{idCardNo} 
+			</if>
+			<if test="status!=null">
+				  AND status=#{status} 
+			</if>
+			<if test="province!=null">
+				  AND province=#{province} 
+			</if>
+			<if test="provinceCode!=null">
+				  AND province_code=#{provinceCode} 
+			</if>
+			<if test="city!=null">
+				  AND city=#{city} 
+			</if>
+			<if test="cityCode!=null">
+				  AND city_code=#{cityCode} 
+			</if>
+			<if test="county!=null">
+				  AND county=#{county} 
+			</if>
+			<if test="countyCode!=null">
+				  AND county_code=#{countyCode} 
+			</if>
+			<if test="creater!=null">
+				  AND creater=#{creater} 
+			</if>
+			<if test="createdTime!=null">
+				  AND created_time=#{createdTime} 
+			</if>
+			<if test="modifier!=null">
+				  AND modifier=#{modifier} 
+			</if>
+			<if test="updatedTime!=null">
+				  AND updated_time=#{updatedTime} 
+			</if>
+			<if test="lastLoginTime!=null">
+				  AND last_login_time=#{lastLoginTime} 
+			</if>
+			</trim>
+	</delete>
+
+	<!-- 添加 （匹配有值的字段）-->
+	<insert id="insert" parameterType="com.meyki.elife.plat.console.agency.domain.TopUser">
+		 INSERT INTO agent_top_user
+		 <trim prefix="(" suffix=")" suffixOverrides="," >
+			<if test="id != null">
+				 id,
+			</if>
+			<if test="userId != null">
+				 user_id,
+			</if>
+			<if test="userName != null">
+				 username,
+			</if>
+			<if test="trueName != null">
+				 true_name,
+			</if>
+			<if test="password != null">
+				 password,
+			</if>
+			<if test="salt != null">
+				 salt,
+			</if>
+			<if test="token != null">
+				 token,
+			</if>
+			<if test="nickname != null">
+				 nickname,
+			</if>
+			<if test="email != null">
+				 email,
+			</if>
+			<if test="userType != null">
+				 user_type,
+			</if>
+			<if test="mobile != null">
+				 mobile,
+			</if>
+			<if test="telephone != null">
+				 telephone,
+			</if>
+			<if test="avatar != null">
+				 avatar,
+			</if>
+			<if test="userLevel != null">
+				 user_level,
+			</if>
+			<if test="idCardNo != null">
+				 id_card_no,
+			</if>
+			<if test="status != null">
+				 status,
+			</if>
+			<if test="province != null">
+				 province,
+			</if>
+			<if test="provinceCode != null">
+				 province_code,
+			</if>
+			<if test="city != null">
+				 city,
+			</if>
+			<if test="cityCode != null">
+				 city_code,
+			</if>
+			<if test="county != null">
+				 county,
+			</if>
+			<if test="countyCode != null">
+				 county_code,
+			</if>
+			<if test="creater != null">
+				 creater,
+			</if>
+			<if test="createdTime != null">
+				 created_time,
+			</if>
+			<if test="modifier != null">
+				 modifier,
+			</if>
+			<if test="updatedTime != null">
+				 updated_time,
+			</if>
+			<if test="lastLoginTime != null">
+				 last_login_time,
+			</if>
+
+		 </trim>
+		 <trim prefix="values (" suffix=")" suffixOverrides="," >
+			<if test="id!=null">
+				 #{id},
+			</if>
+			<if test="userId!=null">
+				 #{userId},
+			</if>
+			<if test="userName!=null">
+				 #{userName},
+			</if>
+			<if test="trueName!=null">
+				 #{trueName},
+			</if>
+			<if test="password!=null">
+				 #{password},
+			</if>
+			<if test="salt!=null">
+				 #{salt},
+			</if>
+			<if test="token!=null">
+				 #{token},
+			</if>
+			<if test="nickname!=null">
+				 #{nickname},
+			</if>
+			<if test="email!=null">
+				 #{email},
+			</if>
+			<if test="userType!=null">
+				 #{userType},
+			</if>
+			<if test="mobile!=null">
+				 #{mobile},
+			</if>
+			<if test="telephone!=null">
+				 #{telephone},
+			</if>
+			<if test="avatar!=null">
+				 #{avatar},
+			</if>
+			<if test="userLevel!=null">
+				 #{userLevel},
+			</if>
+			<if test="idCardNo!=null">
+				 #{idCardNo},
+			</if>
+			<if test="status!=null">
+				 #{status},
+			</if>
+			<if test="province!=null">
+				 #{province},
+			</if>
+			<if test="provinceCode!=null">
+				 #{provinceCode},
+			</if>
+			<if test="city!=null">
+				 #{city},
+			</if>
+			<if test="cityCode!=null">
+				 #{cityCode},
+			</if>
+			<if test="county!=null">
+				 #{county},
+			</if>
+			<if test="countyCode!=null">
+				 #{countyCode},
+			</if>
+			<if test="creater!=null">
+				 #{creater},
+			</if>
+			<if test="createdTime!=null">
+				 #{createdTime},
+			</if>
+			<if test="modifier!=null">
+				 #{modifier},
+			</if>
+			<if test="updatedTime!=null">
+				 #{updatedTime},
+			</if>
+			<if test="lastLoginTime!=null">
+				 #{lastLoginTime},
+			</if>
+		 </trim>
+	</insert>
+
+	<!-- 修 改-->
+	<update id="update" parameterType="com.meyki.elife.plat.console.agency.domain.TopUser">
+		 UPDATE agent_top_user
+		 <trim prefix="set" suffixOverrides="," >
+
+			<if test="userId != null">
+				 user_id = #{userId},
+			</if>
+			<if test='newUsername != null and  newUsername!= ""'>
+				 username = #{newUsername},
+			</if>
+			<if test="trueName != null">
+				 true_name = #{trueName},
+			</if>
+			<if test="password != null">
+				 password = #{password},
+			</if>
+			<if test="salt != null">
+				 salt = #{salt},
+			</if>
+			<if test="token != null">
+				 token = #{token},
+			</if>
+			<if test="nickname != null">
+				 nickname = #{nickname},
+			</if>
+			<if test="email != null">
+				 email = #{email},
+			</if>
+			<if test="userType != null">
+				 user_type = #{userType},
+			</if>
+			<if test="mobile != null">
+				 mobile = #{mobile},
+			</if>
+			<if test="telephone != null">
+				 telephone = #{telephone},
+			</if>
+			<if test="avatar != null">
+				 avatar = #{avatar},
+			</if>
+			<if test="userLevel != null">
+				 user_level = #{userLevel},
+			</if>
+			<if test="idCardNo != null">
+				 id_card_no = #{idCardNo},
+			</if>
+			<if test="status != null">
+				 status = #{status},
+			</if>
+			<if test="province != null">
+				 province = #{province},
+			</if>
+			<if test="provinceCode != null">
+				 province_code = #{provinceCode},
+			</if>
+			<if test="city != null">
+				 city = #{city},
+			</if>
+			<if test="cityCode != null">
+				 city_code = #{cityCode},
+			</if>
+			<if test="county != null">
+				 county = #{county},
+			</if>
+			<if test="countyCode != null">
+				 county_code = #{countyCode},
+			</if>
+			<if test="creater != null">
+				 creater = #{creater},
+			</if>
+			<if test="createdTime != null">
+				 created_time = #{createdTime},
+			</if>
+			<if test="modifier != null">
+				 modifier = #{modifier},
+			</if>
+			<if test="modifyTime != null">
+				 updated_time = #{modifyTime},
+			</if>
+			<if test="lastLoginTime != null">
+				 last_login_time = #{lastLoginTime},
+			</if>
+
+		 </trim>
+		<trim prefix="WHERE" prefixOverrides="AND|OR">
+			<if test="userId!=null">
+				  AND user_id=#{userId} 
+			</if>
+		</trim>
+	</update>
+
+	<!-- 添加 （批量添加）-->
+	<insert id="batchInsert" parameterType="java.util.List">
+		 INSERT INTO agent_top_user
+			<trim prefix="(" suffix=") values " suffixOverrides="," >
+			 <foreach item="item" index="index" collection="list" >
+				<if test="index == 0">
+					<if test="item.id != null">
+					 id,
+					</if>
+					<if test="item.userId != null">
+					 user_id,
+					</if>
+					<if test="item.userName != null">
+					 username,
+					</if>
+					<if test="item.trueName != null">
+					 true_name,
+					</if>
+					<if test="item.password != null">
+					 password,
+					</if>
+					<if test="item.salt != null">
+					 salt,
+					</if>
+					<if test="item.token != null">
+					 token,
+					</if>
+					<if test="item.nickname != null">
+					 nickname,
+					</if>
+					<if test="item.email != null">
+					 email,
+					</if>
+					<if test="item.userType != null">
+					 user_type,
+					</if>
+					<if test="item.mobile != null">
+					 mobile,
+					</if>
+					<if test="item.telephone != null">
+					 telephone,
+					</if>
+					<if test="item.avatar != null">
+					 avatar,
+					</if>
+					<if test="item.userLevel != null">
+					 user_level,
+					</if>
+					<if test="item.idCardNo != null">
+					 id_card_no,
+					</if>
+					<if test="item.status != null">
+					 status,
+					</if>
+					<if test="item.province != null">
+					 province,
+					</if>
+					<if test="item.provinceCode != null">
+					 province_code,
+					</if>
+					<if test="item.city != null">
+					 city,
+					</if>
+					<if test="item.cityCode != null">
+					 city_code,
+					</if>
+					<if test="item.county != null">
+					 county,
+					</if>
+					<if test="item.countyCode != null">
+					 county_code,
+					</if>
+					<if test="item.creater != null">
+					 creater,
+					</if>
+					<if test="item.createdTime != null">
+					 created_time,
+					</if>
+					<if test="item.modifier != null">
+					 modifier,
+					</if>
+					<if test="item.updatedTime != null">
+					 updated_time,
+					</if>
+					<if test="item.lastLoginTime != null">
+					 last_login_time,
+					</if>
+
+				</if>
+			 </foreach>
+		 </trim>
+		<foreach item="item" index="index" collection="list" separator=",">
+		 <trim prefix="values (" suffix=")" suffixOverrides="," >
+			<if test="item.id!=null">
+				 #{item.id},
+			</if>
+			<if test="item.userId!=null">
+				 #{item.userId},
+			</if>
+			<if test="item.userName!=null">
+				 #{item.userName},
+			</if>
+			<if test="item.trueName!=null">
+				 #{item.trueName},
+			</if>
+			<if test="item.password!=null">
+				 #{item.password},
+			</if>
+			<if test="item.salt!=null">
+				 #{item.salt},
+			</if>
+			<if test="item.token!=null">
+				 #{item.token},
+			</if>
+			<if test="item.nickname!=null">
+				 #{item.nickname},
+			</if>
+			<if test="item.email!=null">
+				 #{item.email},
+			</if>
+			<if test="item.userType!=null">
+				 #{item.userType},
+			</if>
+			<if test="item.mobile!=null">
+				 #{item.mobile},
+			</if>
+			<if test="item.telephone!=null">
+				 #{item.telephone},
+			</if>
+			<if test="item.avatar!=null">
+				 #{item.avatar},
+			</if>
+			<if test="item.userLevel!=null">
+				 #{item.userLevel},
+			</if>
+			<if test="item.idCardNo!=null">
+				 #{item.idCardNo},
+			</if>
+			<if test="item.status!=null">
+				 #{item.status},
+			</if>
+			<if test="item.province!=null">
+				 #{item.province},
+			</if>
+			<if test="item.provinceCode!=null">
+				 #{item.provinceCode},
+			</if>
+			<if test="item.city!=null">
+				 #{item.city},
+			</if>
+			<if test="item.cityCode!=null">
+				 #{item.cityCode},
+			</if>
+			<if test="item.county!=null">
+				 #{item.county},
+			</if>
+			<if test="item.countyCode!=null">
+				 #{item.countyCode},
+			</if>
+			<if test="item.creater!=null">
+				 #{item.creater},
+			</if>
+			<if test="item.createdTime!=null">
+				 #{item.createdTime},
+			</if>
+			<if test="item.modifier!=null">
+				 #{item.modifier},
+			</if>
+			<if test="item.updatedTime!=null">
+				 #{item.updatedTime},
+			</if>
+			<if test="item.lastLoginTime!=null">
+				 #{item.lastLoginTime},
+			</if>
+		 </trim>
+		</foreach>
+	</insert>
+	<!-- 修 改(批量修改)-->
+	<update id="batchUpdate" parameterType="java.util.List">
+		<foreach item="item" index="index" collection="list" separator=";">
+		 UPDATE agent_top_user
+		 <trim prefix="set" suffixOverrides="," >
+			<if test="item.userId != null">
+				 user_id = #{item.userId},
+			</if>
+			<if test="item.userName != null">
+				 username = #{item.userName},
+			</if>
+			<if test="item.trueName != null">
+				 true_name = #{item.trueName},
+			</if>
+			<if test="item.password != null">
+				 password = #{item.password},
+			</if>
+			<if test="item.salt != null">
+				 salt = #{item.salt},
+			</if>
+			<if test="item.token != null">
+				 token = #{item.token},
+			</if>
+			<if test="item.nickname != null">
+				 nickname = #{item.nickname},
+			</if>
+			<if test="item.email != null">
+				 email = #{item.email},
+			</if>
+			<if test="item.userType != null">
+				 user_type = #{item.userType},
+			</if>
+			<if test="item.mobile != null">
+				 mobile = #{item.mobile},
+			</if>
+			<if test="item.telephone != null">
+				 telephone = #{item.telephone},
+			</if>
+			<if test="item.avatar != null">
+				 avatar = #{item.avatar},
+			</if>
+			<if test="item.userLevel != null">
+				 user_level = #{item.userLevel},
+			</if>
+			<if test="item.idCardNo != null">
+				 id_card_no = #{item.idCardNo},
+			</if>
+			<if test="item.status != null">
+				 status = #{item.status},
+			</if>
+			<if test="item.province != null">
+				 province = #{item.province},
+			</if>
+			<if test="item.provinceCode != null">
+				 province_code = #{item.provinceCode},
+			</if>
+			<if test="item.city != null">
+				 city = #{item.city},
+			</if>
+			<if test="item.cityCode != null">
+				 city_code = #{item.cityCode},
+			</if>
+			<if test="item.county != null">
+				 county = #{item.county},
+			</if>
+			<if test="item.countyCode != null">
+				 county_code = #{item.countyCode},
+			</if>
+			<if test="item.creater != null">
+				 creater = #{item.creater},
+			</if>
+			<if test="item.createdTime != null">
+				 created_time = #{item.createdTime},
+			</if>
+			<if test="item.modifier != null">
+				 modifier = #{item.modifier},
+			</if>
+			<if test="item.updatedTime != null">
+				 updated_time = #{item.updatedTime},
+			</if>
+			<if test="item.lastLoginTime != null">
+				 last_login_time = #{item.lastLoginTime},
+			</if>
+
+		 </trim>
+		 WHERE id = #{id}
+		</foreach> 
+	</update>
+
+	<!--删除：批量删除-->
+	<delete id="batchDelete" parameterType="java.util.List">
+		 DELETE FROM agent_top_user
+		 WHERE id in
+		<foreach collection="list" item="item" open="(" separator="," close=")">
+			#{item.id}
+		</foreach>
+	</delete>
+
+</mapper>
