@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
+
 public class Test {
 
 	public static void main1(String[] args) {
@@ -16,6 +17,13 @@ public class Test {
 			Map.Entry entry = (Map.Entry)iter.next();
 			Object key = entry.getKey();
 			Object value = entry.getValue();
+		}
+		
+		Iterator iter2 = map.entrySet().iterator();
+		while(iter2.hasNext()){
+			Map.Entry en = (java.util.Map.Entry) iter2.next();
+			en.getKey();
+			en.getValue();
 		}
 	}
 	

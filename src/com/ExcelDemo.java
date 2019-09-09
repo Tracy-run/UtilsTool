@@ -107,7 +107,7 @@ public class ExcelDemo {
      
      
    /**第二种是输出到也面中的excel名称   * */
-//     pName="栏目统计表"; 
+//   pName="栏目统计表"; 
 //	 response.reset(); 
 //	 response.setContentType("application/x-msdownload"); 
 //	 response.setHeader("Content-Disposition","attachment; filename="+new String(pName.getBytes("gb2312"),"ISO-8859-1")+".xls"); 

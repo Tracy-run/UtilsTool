@@ -8,6 +8,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Properties;
 import java.util.Queue;
+import java.util.Scanner;
 import java.util.Stack;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -39,7 +40,7 @@ public class TestDemo extends Thread {
 		Class  clas = String.class;
 	}
 	
-	public static void main(String[] args) throws Throwable {
+	public static void main2(String[] args) throws Throwable {
 		 int j=0;
 		 new HashMap<>();
 		 new ArrayList<>();
@@ -63,6 +64,12 @@ public class TestDemo extends Thread {
 		 
 		 List<Integer> list1 = Arrays.asList(0, 1, 2, 3);
 //		 int count = list1.stream().reduce(0, (acc, item) -> acc + item).intValue();
+		 
+		 Scanner scan = new Scanner(System.in);
+		 int nextInt = scan.nextInt();
+		 String nextLine = scan.nextLine();
+		 
+		 
 		 
 		 
 		 ScheduledExecutorService newScheduledThreadPool = Executors.newScheduledThreadPool(3);
@@ -105,6 +112,78 @@ public class TestDemo extends Thread {
 		});
 	
 	}
+	
+	
+	
+	
+	
+public static void main(String [] args){
+        
+        //Scanner scan = new Scanner(System.in);
+        
+        int size = 7; //scan.nextInt();
+        String member = "3 4 1 5 6 2 7";//scan.nextLine();
+        String [] arr = member.split(" ");
+        
+        for(int i=0;i<size;i++){
+            int temp = Integer.valueOf(arr[i]);
+            System.out.print(left(arr,temp,i));
+            System.out.println(right(arr,temp,i));
+        }
+        
+    }
+    
+	public static String left(String [] arr,int temp, int n){
+	    String str = "";
+	    h:for(int a = 0;a< n;a++){
+	        if(n == 0){
+	            str += (-1 + " ");
+	            break;
+	        }
+	        int tt = a;
+	        while(tt <= n){
+		        if(tt <= n){
+		          if(Integer.valueOf(arr[n-tt]) <temp){
+		              str+= (n-tt) + (" ");
+		              break h;
+		          }
+		        }
+		        tt++;
+	        }
+	    }
+	    if(str.equals("") || str == null){
+	    	System.out.print("");
+	    }
+	    return str .equals("") ? "-1 ": str;
+	}	
+	
+	public static String right(String [] arr,int temp, int n){
+	    String sb = "";
+	    h:for(int a = n;a< arr.length;a++){
+	        if(n == arr.length){
+	            sb+=(-1 + "");
+	            break;
+	        }
+	        int tt = a;
+	        while(tt >= n){
+		        if(tt >= n && tt<arr.length){
+		          if(Integer.valueOf(arr[tt]) <temp){
+		              sb+= (tt) + (" ");
+		              break h;
+		          }
+		        }
+		        tt++;
+	        }
+	    }
+	    return sb.equals("")? "-1": sb;
+	}
+	
+	
+	
+	
+	
+	
+	
 	
 	
 }

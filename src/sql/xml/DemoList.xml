@@ -656,7 +656,7 @@
 			 </foreach>
 		 </trim>
 		<foreach item="item" index="index" collection="list" separator=",">
-		 <trim prefix="values (" suffix=")" suffixOverrides="," >
+		 <trim prefix=" (" suffix=")" suffixOverrides="," >
 			<if test="item.id!=null">
 				 #{item.id},
 			</if>
@@ -839,4 +839,11 @@
 		</foreach>
 	</delete>
 
+	<!-- 新添加的方法 -->
+	<delete id="deleteBatchByPrimaryKey" parameterType="java.util.List" >
+		delete from system_user where id in
+		<foreach collection="list" item="id" index="index" open="(" close=")" separator=",">
+	         #{ id,jdbcType=VARCHAR}
+		</foreach>
+	</delete>
 </mapper>
