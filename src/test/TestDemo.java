@@ -1,10 +1,13 @@
 package test;
 
 import java.io.FileInputStream;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Properties;
 import java.util.Queue;
@@ -70,46 +73,6 @@ public class TestDemo extends Thread {
 		 String nextLine = scan.nextLine();
 		 
 		 
-		 
-		 
-		 ScheduledExecutorService newScheduledThreadPool = Executors.newScheduledThreadPool(3);
-		 newScheduledThreadPool.submit(new Runnable() {
-			@Override
-			public void run() {
-				// TODO Auto-generated method stub
-			}
-		 });
-		 newScheduledThreadPool.schedule(new Runnable() {
-			public void run() {
-				
-			}
-		 }, 1,TimeUnit.DAYS);
-		 
-		 
-		 ExecutorService newFixedThreadPool = Executors.newFixedThreadPool(3);
-		 newFixedThreadPool.execute(new Runnable() {
-			@Override
-			public void run() {
-				//实现业务逻辑
-			}
-		});
-		 
-		 ExecutorService newCachedThreadPool = Executors.newCachedThreadPool();
-		 newCachedThreadPool.submit(new Runnable() {
-			
-			@Override
-			public void run() {
-				
-			}
-		});
-		
-		 ExecutorService newSingleThreadExecutor = Executors.newSingleThreadExecutor();
-		 newSingleThreadExecutor.submit(new Runnable() {
-			@Override
-			public void run() {
-				
-			}
-		});
 	
 	}
 	
@@ -117,73 +80,80 @@ public class TestDemo extends Thread {
 	
 	
 	
-public static void main(String [] args){
+	public static void main23(String [] args){
         
-        //Scanner scan = new Scanner(System.in);
-        
-        int size = 7; //scan.nextInt();
-        String member = "3 4 1 5 6 2 7";//scan.nextLine();
-        String [] arr = member.split(" ");
-        
-        for(int i=0;i<size;i++){
-            int temp = Integer.valueOf(arr[i]);
-            System.out.print(left(arr,temp,i));
-            System.out.println(right(arr,temp,i));
+        char [] str = new char[]{'a','b','c','d','e'};
+        helper(0, str);
+    }
+
+    public static void helper(int index, char [] str) {
+        if (str == null || index >= 5) {
+            return;
         }
+        System.out.print(str[index]);
+        helper(index + 1, str);
+         
+        System.out.print("#");
+         
+        System.out.print("*");
+        System.out.print(str[index]);
+    }
         
+    
+    public static ExecutorService newCachedThreadPool = Executors.newCachedThreadPool();
+	
+    public static void mai111n(String [] args){
+	    SimpleDateFormat format = new SimpleDateFormat("YYYY-mm-dd HH:mm:ss");
+    	System.out.println("start:" + format.format(new Date()));
+		for(int i=0;i<10000;i++){
+//			try {
+//				Thread.sleep(200);
+//			} catch (InterruptedException e) {
+//				// TODO Auto-generated catch block
+//				e.printStackTrace();
+//			}
+			 newCachedThreadPool.submit(new Runnable() {
+				@Override
+				public void run() {
+					try {
+						Thread.sleep(200);
+					} catch (InterruptedException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}
+			});
+		}
+		System.out.println("end:" + format.format(new Date()));
+	}
+    
+    public static void main(String [] args){
+    	test(null);
     }
     
-	public static String left(String [] arr,int temp, int n){
-	    String str = "";
-	    h:for(int a = 0;a< n;a++){
-	        if(n == 0){
-	            str += (-1 + " ");
-	            break;
-	        }
-	        int tt = a;
-	        while(tt <= n){
-		        if(tt <= n){
-		          if(Integer.valueOf(arr[n-tt]) <temp){
-		              str+= (n-tt) + (" ");
-		              break h;
-		          }
-		        }
-		        tt++;
-	        }
-	    }
-	    if(str.equals("") || str == null){
-	    	System.out.print("");
-	    }
-	    return str .equals("") ? "-1 ": str;
-	}	
-	
-	public static String right(String [] arr,int temp, int n){
-	    String sb = "";
-	    h:for(int a = n;a< arr.length;a++){
-	        if(n == arr.length){
-	            sb+=(-1 + "");
-	            break;
-	        }
-	        int tt = a;
-	        while(tt >= n){
-		        if(tt >= n && tt<arr.length){
-		          if(Integer.valueOf(arr[tt]) <temp){
-		              sb+= (tt) + (" ");
-		              break h;
-		          }
-		        }
-		        tt++;
-	        }
-	    }
-	    return sb.equals("")? "-1": sb;
-	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
+    public static void test(String temp){
+        String [] temps = "111100111110011".split(" ");
+        
+        
+        
+        System.out.println();
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
 }
